@@ -1,12 +1,18 @@
 import React, {useState} from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { AiOutlineMenu, AiOutlineSearch, AiOutlineClose, AiFillTag } from 'react-icons/ai';
-import { BsFillCartFill,BsFillSaveFill } from 'react-icons/bs';
+import { BsFillSaveFill } from 'react-icons/bs';
+import { GoHomeFill } from "react-icons/go";
 import {FaUserFriends} from 'react-icons/fa'
-import { MdHelp} from 'react-icons/md'
-import { Link } from 'react-router-dom';
+import { IoLogIn, IoLogOut } from "react-icons/io5";
+import { MdHelp } from 'react-icons/md'
 
 const Navbar = () => {
-const [nav, setNav] = useState(false)
+  const navigate = useNavigate();
+  const [nav, setNav] = useState(false)
+
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/login';
 
   return (
     <div className='max-w-[1640px] mx-auto flex justify-between items-center p-4'>
@@ -21,6 +27,7 @@ const [nav, setNav] = useState(false)
       </div>
 
       {/* Search Input */}
+      {!isLoginPage && (
       <div className='bg-gray-200 rounded-full flex items-center px-2 w-[200px] sm:w-[400px] lg:w-[500px]'>
         <AiOutlineSearch size={25} />
         <input
@@ -29,10 +36,7 @@ const [nav, setNav] = useState(false)
           placeholder='Search foods'
         />
       </div>
-      {/* Cart button */}
-      <button className='bg-black text-white hidden md:flex items-center py-2 rounded-full'>
-        <BsFillCartFill size={20} className='mr-2' /> Save
-      </button>
+      )}
 
       {/* Mobile Menu */}
       {/* Overlay */}
@@ -51,10 +55,13 @@ const [nav, setNav] = useState(false)
         </h2>
         <nav>
             <ul className='flex flex-col p-4 text-gray-800'>
-                <Link className='text-xl py-4 flex'><MdHelp size={25} className='mr-4' /> Help</Link>
-                <Link className='text-xl py-4 flex'><AiFillTag size={25} className='mr-4' /> Promotions</Link>
-                <Link className='text-xl py-4 flex'><BsFillSaveFill size={25} className='mr-4' /> Best Ones</Link>
-                <Link className='text-xl py-4 flex'><FaUserFriends size={25} className='mr-4' /> Invite Friends</Link>
+                <button onClick={()=>navigate("/")} className='text-xl py-4 flex cursor-pointer hover:bg-slate-300 rounded-full px-2'><GoHomeFill size={25} className='mr-4' /> Home</button>
+                <button className='text-xl py-4 flex cursor-pointer hover:bg-slate-300 rounded-full px-2'><MdHelp size={25} className='mr-4' /> Help</button>
+                <button className='text-xl py-4 flex cursor-pointer hover:bg-slate-300 rounded-full px-2'><AiFillTag size={25} className='mr-4' /> Promotions</button>
+                <button className='text-xl py-4 flex cursor-pointer hover:bg-slate-300 rounded-full px-2'><BsFillSaveFill size={25} className='mr-4' /> Best Ones</button>
+                <button className='text-xl py-4 flex cursor-pointer hover:bg-slate-300 rounded-full px-2'><FaUserFriends size={25} className='mr-4' /> Invite Friends</button>
+                <button onClick={()=>navigate("/login")} className='text-xl py-4 flex cursor-pointer hover:bg-slate-300 rounded-full px-2'><IoLogIn  size={25} className='mr-4' /> Login</button>
+                <button className='text-xl py-4 flex cursor-pointer hover:bg-slate-300 rounded-full px-2'><IoLogOut  size={25} className='mr-4' /> LogOut</button>
             </ul>
         </nav>
       </div>
