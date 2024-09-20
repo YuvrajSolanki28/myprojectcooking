@@ -64,6 +64,7 @@ const Food = () => {
           <div
             key={index}
             className='border shadow-lg rounded-lg hover:scale-105 duration-300'
+            onClick={() => handleClick(item)}
           >
             <img
               src={item.image}
@@ -73,7 +74,6 @@ const Food = () => {
             <div className='flex justify-between px-2 py-4'>
               <p className='font-bold'>{item.name}</p>
               <button
-                onClick={() => handleClick(item)}
                 className='bg-orange-500 text-white hover:bg-white hover:text-orange-500 p-1 rounded-full font-bold px-2'
               >
                 Recipe
